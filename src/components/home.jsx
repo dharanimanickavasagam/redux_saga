@@ -1,11 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addArticle } from "../actions/article";
+import { getPost } from "../actions/post";
 
 class Home extends Component {
   state = {
-    article: ""
+    article: "",
+    post: []
   };
+
+  async componentDidMount() {
+    this.props.getPost();
+    //this.setState({ post });
+  }
 
   handleArticle = event => {
     this.setState({ article: event.target.value });
@@ -37,13 +44,15 @@ class Home extends Component {
 
 const mapStateToProps = state => {
   return {
-    articles: state.article.articles
+    articles: state.article.articles,
+    post: state.post.posts
   };
 };
 
 const mapDispatchToprops = dispatch => {
   return {
-    addArticle: article => dispatch(addArticle(article))
+    addArticle: article => dispatch(addArticle(article)),
+    getPost: dispatch(getPost())
   };
 };
 
