@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Sample redux-saga learning web app bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
