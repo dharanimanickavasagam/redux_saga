@@ -21,19 +21,20 @@ class Home extends Component {
     this.setState({ article: event.target.value });
   };
 
-  // handleAddNewArticle = () => {
-  //   this.props.addArticle(this.state.article);
-  //   this.setState({article : })
-  // };
+  handleAddNewArticle = () => {
+    this.props.addArticle(this.state.article);
+    this.setState({ article: "" });
+  };
 
   render() {
     return (
       <div>
-        <input type="text" onChange={this.handleArticleTextBox} />
-        <button
-          type="button"
-          onClick={() => this.props.addArticle(this.state.article)}
-        >
+        <input
+          type="text"
+          value={this.state.article}
+          onChange={this.handleArticleTextBox}
+        />
+        <button type="button" onClick={this.handleAddNewArticle}>
           Add
         </button>
 
