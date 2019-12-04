@@ -50,8 +50,8 @@ class Home extends Component {
         <div>
           <u> Async call to get posts using sagas </u>
           <ul>
-            {this.props.posts.map((post, index) => (
-              <li key={index}> {post.title} </li>
+            {this.props.posts.map(post => (
+              <li key={post.id}> {post.title} </li>
             ))}
           </ul>
         </div>
