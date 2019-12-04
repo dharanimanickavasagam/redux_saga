@@ -6,22 +6,30 @@ import { getPost } from "../actions/post";
 class Home extends Component {
   state = {
     article: "",
-    post: []
+    posts: []
   };
 
-  async componentDidMount() {
-    this.props.getPost();
-    //this.setState({ post });
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.posts !== this.props.posts) {
+      getPost();
+      const posts = this.props.posts;
+      this.setState({ posts });
+    }
   }
 
-  handleArticle = event => {
+  handleArticleTextBox = event => {
     this.setState({ article: event.target.value });
   };
+
+  // handleAddNewArticle = () => {
+  //   this.props.addArticle(this.state.article);
+  //   this.setState({article : })
+  // };
 
   render() {
     return (
       <div>
-        <input type="text" onChange={this.handleArticle} />
+        <input type="text" onChange={this.handleArticleTextBox} />
         <button
           type="button"
           onClick={() => this.props.addArticle(this.state.article)}
@@ -30,10 +38,19 @@ class Home extends Component {
         </button>
 
         <div>
-          Existing articles
+          <u> Existing articles </u>
           <ul>
-            {this.props.articles.map(art => (
-              <li key={art}> {art}</li>
+            {this.props.articles.map((article, index) => (
+              <li key={index}> {article}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <u> Async call to get posts using sagas </u>
+          <ul>
+            {this.props.posts.map((post, index) => (
+              <li key={index}> {post.title} </li>
             ))}
           </ul>
         </div>
@@ -45,7 +62,7 @@ class Home extends Component {
 const mapStateToProps = state => {
   return {
     articles: state.article.articles,
-    post: state.post.posts
+    posts: state.post.posts
   };
 };
 

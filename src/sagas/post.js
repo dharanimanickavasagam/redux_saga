@@ -1,5 +1,5 @@
 import { takeEvery, call, put } from "redux-saga/effects";
-import { GET_POST } from "../constants/constants";
+import { GET_POST, ADD_POST } from "../constants/constants";
 import axios from "axios";
 
 export default function* watcherSaga() {
@@ -16,7 +16,7 @@ const getData = async () => {
 function* workerSaga() {
   try {
     const payload = yield call(getData);
-    console.log(payload);
+    yield put({ type: ADD_POST, payload });
   } catch (e) {
     yield put({ type: "API_ERRORED", payload: e });
   }
